@@ -83,6 +83,7 @@ public class OrderService {
             if(i>5)cardUse+=card.getCardNo().charAt(i);
             else cardUse+="X";
         }
+
         order.setCardUsed(cardUse);//set the card used
 
 
@@ -114,14 +115,14 @@ public class OrderService {
         Ordered savedOrder = saveCustomer.getOrderedList().get(saveCustomer.getOrderedList().size()-1);
 
         //to send the email to the student email
-        String text = "You have successfully purchased "+orderRequestDTO.getRequiredQuantity()+" "+product.getName()+" for Rs."+totalCost;
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("backenedmarchsb@gmail.com");
-        message.setTo(customer.getEmail());
-        message.setSubject("Order Success Notification");
-        message.setText(text);
-        emailSender.send(message);
+//        String text = "You have successfully purchased "+orderRequestDTO.getRequiredQuantity()+" "+product.getName()+" for Rs."+totalCost;
+//
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setFrom("backenedmarchsb@gmail.com");
+//        message.setTo(customer.getEmail());
+//        message.setSubject("Order Success Notification");
+//        message.setText(text);
+//        emailSender.send(message);
 
 
         //create the orderResponse object
@@ -129,7 +130,7 @@ public class OrderService {
         orderResponseDTO.setProductName(product.getName());
         orderResponseDTO.setOrderDate(savedOrder.getOrderDate());
         orderResponseDTO.setQuantityOrdered(orderRequestDTO.getRequiredQuantity());
-        orderResponseDTO.setCardUsed(card.getCardNo());
+        orderResponseDTO.setCardUsed(cardUse);
         orderResponseDTO.setItemPrice(product.getPrice());
         orderResponseDTO.setTotalCost(savedOrder.getTotalCost());
         orderResponseDTO.setDeliveryCharge(savedOrder.getDeliveryCharge());
